@@ -6,9 +6,6 @@ import useMediaDevices from "./useMediaDevice";
 export const PictureCamera: React.FC<{
   pictureFileName: string;
 }> = ({ pictureFileName }) => {
-  const [cameraMode, setCameraMode] = React.useState<"user" | "environment">(
-    "user"
-  );
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const state: any = useMediaDevices();
 
@@ -31,7 +28,7 @@ export const PictureCamera: React.FC<{
     setImgSource(imageSource);
   }, [webcamReference, pictureFileName]);
 
-  console.log(state);
+  console.log({ selectedId, state });
 
   return (
     <>
@@ -72,9 +69,6 @@ export const PictureCamera: React.FC<{
               screenshotFormat="image/jpeg"
               width={889}
               videoConstraints={{
-                width: 889,
-                height: 500,
-                facingMode: cameraMode,
                 deviceId: selectedId,
               }}
               screenshotQuality={1}
@@ -101,18 +95,7 @@ export const PictureCamera: React.FC<{
           </Box>
         </Flex>
       </Flex>
-      <Button
-        onClick={() => {
-          if (cameraMode === "user") {
-            setCameraMode("environment");
-          } else {
-            setCameraMode("user");
-          }
-        }}
-      >
-        {cameraMode === "user" ? "Switch to Environment" : "Switch to User"}
-      </Button>
-      <Box py={12}>
+      <Box pt={12}>
         <a
           href="https://webrtc.github.io/samples/src/content/devices/input-output/"
           target="_blank"
@@ -120,9 +103,17 @@ export const PictureCamera: React.FC<{
           devices/input-output
         </a>
       </Box>
-      <Box>
-        <a href="https://webcamtests.com/" target="_blank">
-          https://webcamtests.com/
+      <Box pt={12}>
+        <a
+          href="https://beaufortfrancois.github.io/sandbox/image-capture/playground.html"
+          target="_blank"
+        >
+          https://beaufortfrancois.github.io/sandbox/image-capture/playground.html
+        </a>
+      </Box>
+      <Box pt={12}>
+        <a href="https://baku89.github.io/tethr/" target="_blank">
+          https://baku89.github.io/tethr/
         </a>
       </Box>
     </>
